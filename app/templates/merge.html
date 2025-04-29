@@ -1,0 +1,19 @@
+<!-- templates/merge.html -->
+{% extends "base.html" %}
+
+{% block title %}Merge Tool{% endblock %}
+
+{% block content %}
+<h1>Trigger Merge</h1>
+<form action="/merge" method="post">
+    <button type="submit">Merge</button>
+</form>
+
+<form action="/" method="get">
+    <button type="submit">Back to Homepage</button>
+</form>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+{% endblock %}
