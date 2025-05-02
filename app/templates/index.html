@@ -1,15 +1,14 @@
-<!-- templates/index.html -->
 {% extends "base.html" %}
 
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<h1>Welcome to the Homepage</h1>
-<form action="/merge" method="get">
-    <button type="submit">Go to Merge Tool</button>
-</form>
+<h1>Welcome to the Homepage!</h1>
+
+<a href="/concat"><button>Go to Concat CSV Page</button></a>
 
 {% if message %}
-<p>{{ message }}</p>
+    <h2>{{ message }}</h2>
 {% endif %}
+
 {% endblock %}

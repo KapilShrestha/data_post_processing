@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Concat Tool{% endblock %}
+
+{% block content %}
+<h1>Trigger Concatenation</h1>
+
+<form action="/concat" method="post" enctype="multipart/form-data" id="concatForm">
+    <!-- Input for the number of files -->
+    <label for="num_files">How many files do you want to concat?</label>
+    <input type="number" id="num_files" name="num_files" min="1" required oninput="generateFileInputs()">
+    
+    <br><br>
+    
+    <!-- Placeholder for dynamically added file input fields -->
+    <div id="fileInputs">
+        <label for="files_1">Select file 1:</label>
+        <input type="file" id="files_1" name="files" required>
+    </div>
+
+    <br><br>
+    <button type="submit">Concat</button>
+</form>
+
+<form action="/" method="get">
+    <button type="submit">Back to Homepage</button>
+</form>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+
+<script>
+    function generateFileInputs() {
+        const numFiles = document.getElementById('num_files').value;
+        const fileInputsDiv = document.getElementById('fileInputs');
+        
+        // Clear the existing file input fields
+        fileInputsDiv.innerHTML = '';
+
+        // Dynamically add file input fields based on the number entered
+        for (let i = 1; i <= numFiles; i++) {
+            const label = document.createElement('label');
+            label.setAttribute('for', `files_${i}`);
+            label.textContent = `Select file ${i}:`;
+
+            const input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('id', `files_${i}`);
+            input.setAttribute('name', 'files');  // Update this to 'files', not 'files[]'
+            input.required = true;  // Ensure the user cannot submit without selecting a file
+
+            // Append the new input fields
+            fileInputsDiv.appendChild(label);
+            fileInputsDiv.appendChild(input);
+            fileInputsDiv.appendChild(document.createElement('br'));  // Add a line break for better spacing
+        }
+    }
+</script>
+
+{% endblock %}

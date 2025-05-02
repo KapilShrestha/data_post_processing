@@ -1,5 +1,9 @@
+import logging
 from fastapi import FastAPI
 from app.api.routes import router
+
+# Set up basic logging configuration
+logging.basicConfig(level=logging.INFO)  # This will capture INFO level logs and above.
 
 app = FastAPI()
 
