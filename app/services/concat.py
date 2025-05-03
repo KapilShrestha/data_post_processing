@@ -6,6 +6,7 @@ import logging
 # Set up logger for this file
 logger = logging.getLogger(__name__)
 
+
 def concat_csv_files(files: List[UploadFile]) -> pd.DataFrame:
     dataframes = []
 
@@ -13,9 +14,11 @@ def concat_csv_files(files: List[UploadFile]) -> pd.DataFrame:
         try:
             # Access filename directly from the UploadFile object
             logger.info(f"Processing file: {file.filename}")
-            
+
             # Use file.file to read the content (SpooledTemporaryFile)
-            df = pd.read_csv(file.file)  # This works because file.file is a file-like object
+            df = pd.read_csv(
+                file.file
+            )  # This works because file.file is a file-like object
             dataframes.append(df)
 
             logger.info(f"Successfully processed: {file.filename}")
@@ -28,6 +31,8 @@ def concat_csv_files(files: List[UploadFile]) -> pd.DataFrame:
         logger.info("Concatenation successful.")
     else:
         logger.error("No valid files to concatenate.")
-        combined_df = pd.DataFrame()  # Return an empty DataFrame if no files were processed
+        combined_df = (
+            pd.DataFrame()
+        )  # Return an empty DataFrame if no files were processed
 
     return combined_df

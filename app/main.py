@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from api.routes import router
 
 # Set up basic logging configuration
-logging.basicConfig(level=logging.INFO)  # This will capture INFO level logs and above.
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 

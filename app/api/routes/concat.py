@@ -1,16 +1,21 @@
 from fastapi import APIRouter, Request, UploadFile, File
 from typing import List
-from fastapi.templating import Jinja2Templates
+
 from fastapi.responses import HTMLResponse
 from services.concat import concat_csv_files
 
+from utils.template import templates
+
 router = APIRouter()
-templates = Jinja2Templates(directory="templates")
+
 
 # GET endpoint to serve the upload form
 @router.get("/concat", response_class=HTMLResponse)
 async def get_concat_form(request: Request):
-    return templates.TemplateResponse("concat.html", {"request": request, "message": ""})
+    return templates.TemplateResponse(
+        "concat.html", {"request": request, "message": ""}
+    )
+
 
 # POST endpoint to process uploaded files
 @router.post("/concat", response_class=HTMLResponse)
@@ -25,5 +30,7 @@ async def trigger_concat(request: Request, files: List[UploadFile] = File(...)):
     except Exception as e:
         print(f"===> ERROR: {str(e)}")
         message = f"Concatenation failed: {str(e)}"
-    
-    return templates.TemplateResponse("concat.html", {"request": request, "message": message})
+
+    return templates.TemplateResponse(
+        "concat.html", {"request": request, "message": message}
+    )
