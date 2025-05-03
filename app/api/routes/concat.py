@@ -2,10 +2,10 @@ from fastapi import APIRouter, Request, UploadFile, File
 from typing import List
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from app.services.concat import concat_csv_files
+from services.concat import concat_csv_files
 
 router = APIRouter()
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 
 # GET endpoint to serve the upload form
 @router.get("/concat", response_class=HTMLResponse)

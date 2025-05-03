@@ -2,12 +2,12 @@
 
 from fastapi import APIRouter, Request, File, UploadFile
 from fastapi.templating import Jinja2Templates
-from app.services.merge import merge_files  # Import the merge function
+from services.merge import merge_files  # Import the merge function
 from typing import List
 
 
 router = APIRouter()
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 
 # This route will serve the page for merging CSVs
 @router.get("/merge")

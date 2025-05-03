@@ -3,12 +3,12 @@
 from fastapi import APIRouter, Request, UploadFile, File
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.services.concat import concat_csv_files  # Import the concat function
+from services.concat import concat_csv_files  # Import the concat function
 from typing import List
 
 
 router = APIRouter()
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 async def home(request: Request):
